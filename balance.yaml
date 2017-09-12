@@ -1,0 +1,54 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Swagger API
+host: baas-ug007sr.apigee.net
+basePath: /apac-demo1/sandbox/users
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /monetary/{username}:
+    get:
+      description: "Retrieve monetary balance"
+      parameters:
+      - name: "apikey"
+        in: "header"
+        description: "API Key"
+        required: true
+        type: "string"
+      - name: "username"
+        in: "path"
+        description: "User name"
+        required: true
+        type: "string"
+
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid status value"
+  /bonus/{username}:
+    get:
+       description: "Retrieve bonus balance"
+       parameters:
+       - name: "apikey"
+         in: "header"
+         description: "API Key"
+         required: true
+         type: "string"
+       - name: "username"
+         in: "path"
+         description: "User name"
+         required: true
+         type: "string"
+
+       responses:
+         200:
+           description: "successful operation"
+         400:
+           description: "Invalid status value"
