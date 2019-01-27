@@ -1,0 +1,591 @@
+openapi: '3.0.2'
+info:
+  title: FoodTrust BackOffice API
+  version: 0.1.1
+servers:
+  - url: http://demo-au08-test.apigee.net/v1/foodtrust-backoffice-api
+    description: Dev server
+
+paths:
+  /clients/:
+    get:
+      tags:
+        - Client
+      operationId: getClients
+      summary: Return all clients
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+    post:
+      tags:
+        - Client
+      operationId: addClient
+      summary: Add a client
+      requestBody:
+        description: Client to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClient'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+  /clients/{clientId}/:
+    put:
+      tags:
+        - Client
+      operationId: updateClient
+      summary: Update a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to update
+          schema:
+            type: integer
+      requestBody:
+        description: Client to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+    delete:
+      tags:
+        - Client
+      operationId: deleteClient
+      summary: Delete a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: |-
+            200 response
+  /clients/{clientId}/products/:
+    get:
+      tags:
+        - Product
+      operationId: getClientProducts
+      summary: Get products for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - Product
+      operationId: addClientProduct
+      summary: Add a product for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to add
+          schema:
+            type: integer
+      requestBody:
+        description: Product to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProduct'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /clients/{clientId}/products/{productId}/:
+    put:
+      tags:
+        - Product
+      operationId: updateeteClientProduct
+      summary: Update a product for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to update
+          schema:
+            type: integer
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to update
+          schema:
+            type: integer
+      requestBody:
+        description: Product to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    delete:
+      tags:
+        - Product
+      operationId: deleteClientProduct
+      summary: Delete a product for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to update
+          schema:
+            type: integer
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to update
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagType'
+  /clients/{clientId}/users/:
+    get:
+      tags:
+        - User
+      operationId: getClientUsers
+      summary: Get users for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - User
+      operationId: addClientUser
+      summary: Add a user for a client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to add
+          schema:
+            type: integer
+      requestBody:
+        description: User to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/{productId}/items/:
+    get:
+      tags:
+        - Item
+      operationId: getProductItems
+      summary: Get items for a product
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    post:
+      tags:
+        - Item
+      operationId: uploadProductItems
+      summary: Upload items for a product
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to upload
+          schema:
+            type: integer
+      requestBody:
+        description: Product to add
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                # The property name 'file' will be used for all files.
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: |-
+            200 response
+  /items/{itemId}/trusts/:
+    get:
+      tags:
+        - Trust
+      operationId: getItemTrusts
+      summary: Get trusts for a item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The id of the item to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trust'
+  /items/{itemId}/trusts/events/:
+    get:
+      tags:
+        - Trust
+      operationId: getItemEvents
+      summary: Get events for a item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The id of the item to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /tagtypes/:
+    get:
+      tags:
+        - Tag type
+      operationId: getTagtypes
+      summary: Return all tag types
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagType'
+    post:
+      tags:
+        - Tag type
+      operationId: addTagtype
+      summary: Add a tag type
+      requestBody:
+        description: Tag type to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTagType'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagType'
+  /tagtypes/{tagtypeId}/:
+    put:
+      tags:
+        - Tag type
+      operationId: updateTagtype
+      summary: Update a tag type
+      parameters:
+        - name: tagtypeId
+          in: path
+          required: true
+          description: The id of the tag type to update
+          schema:
+            type: integer
+      requestBody:
+        description: Tag type to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagType'
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagType'
+    delete:
+      tags:
+        - Tag type
+      operationId: deleteTagtype
+      summary: Delete a tag type
+      parameters:
+        - name: tagtypeId
+          in: path
+          required: true
+          description: The id of the tag type to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: |-
+            200 response
+components:
+  schemas:
+    Client:
+      required:
+        - id
+        - name
+        - shortname
+      properties:
+        id:
+          type: 'integer'
+        shortname:
+          type: 'string'
+        name:
+          type: 'string'
+    NewClient:
+      required:
+        - name
+        - shortname
+      properties:
+        shortname:
+          type: 'string'
+        name:
+          type: 'string'
+    User:
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: 'integer'
+        email:
+          type: 'string'
+        name:
+          type: 'string'
+    NewUser:
+      required:
+        - name
+        - email
+      properties:
+        email:
+          type: 'string'
+        name:
+          type: 'string'
+    TagType:
+      required:
+        - kind
+        - native
+        - id
+      properties:
+        id:
+          type: integer
+        kind:
+          type: string
+        native:
+          type: boolean
+        description:
+          type: string
+    NewTagType:
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+        description:
+          type: string
+    Product:
+      required:
+        - id
+        - name
+        - COO
+        - SKU
+        - clientId
+        - tagtypes
+      properties:
+        id:
+          type: 'integer'
+        clientId:
+          type: 'integer'
+        name:
+          type: 'string'
+        COO:
+          type: 'string'
+        SKU:
+          type: 'string'
+        description:
+          type: 'string'
+        tagtypes:
+          type: 'array'
+          items:
+            $ref: '#/components/schemas/TagType'
+    NewProduct:
+      required:
+        - name
+        - COO
+        - SKU
+        - clientId
+        - tagtypes
+      properties:
+        clientId:
+          type: 'integer'
+        name:
+          type: 'string'
+        COO:
+          type: 'string'
+        SKU:
+          type: 'string'
+        description:
+          type: 'string'
+        tagtypes:
+          type: 'array'
+          items:
+            $ref: '#/components/schemas/TagType'
+    Item:
+      required:
+        - timestamp
+        - productId
+        - id
+      properties:
+        id:
+          type: integer
+        productId:
+          type: integer
+        timestamp:
+          type: integer
+        quantity:
+          type: integer
+        image:
+          type: string
+        barcode:
+          type: string
+    Trust:
+      required:
+        - kind
+        - value
+        - tagtypeId
+      properties:
+        tagtypeId:
+          type: integer
+        kind:
+          type: string
+        value:
+          type: string
+        position:
+          type: string
+    Event:
+      required:
+        - tag
+        - value
+        - success
+        - timestamp
+        - lat
+        - lng
+      properties:
+        lat:
+          type: integer
+        lng:
+          type: integer
+        timestamp:
+          type: integer
+        value:
+          type: string
+        tag:
+          type: string
+        success:
+          type: boolean
